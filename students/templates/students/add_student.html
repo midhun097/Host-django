@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Add Student{% endblock %}
+{% block page_title %}Add New Student{% endblock %}
+
+{% block content %}
+<div class="bg-white text-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-lg mx-auto">
+  <h3 class="text-2xl font-bold mb-6 text-center">Add Student</h3>
+
+  <form method="POST" class="space-y-6">
+    {% csrf_token %}
+
+    <!-- Name Field -->
+    <div class="flex flex-col">
+      <label class="mb-2 font-semibold text-gray-700">Name</label>
+      <input type="text" name="name" value="{{ form.name.value }}" 
+             class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      {% if form.name.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.name.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Email Field -->
+    <div class="flex flex-col">
+      <label class="mb-2 font-semibold text-gray-700">Email</label>
+      <input type="email" name="email" value="{{ form.email.value }}" 
+             class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      {% if form.email.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.email.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Age Field -->
+    <div class="flex flex-col">
+      <label class="mb-2 font-semibold text-gray-700">Age</label>
+      <input type="number" name="age" value="{{ form.age.value }}" 
+             class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      {% if form.age.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.age.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Course Field -->
+    <div class="flex flex-col">
+      <label class="mb-2 font-semibold text-gray-700">Course</label>
+      <input type="text" name="course" value="{{ form.course.value }}" 
+             class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      {% if form.course.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ form.course.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="w-full bg-indigo-700 text-white py-2 rounded-lg hover:bg-indigo-600 transition font-semibold">
+      Save Student
+    </button>
+  </form>
+</div>
+{% endblock %}

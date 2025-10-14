@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Student Admin{% endblock %}</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to right, #0f172a, #1e293b);
+      color: white;
+      min-height: 100vh;
+    }
+
+    /* Glass effect for header */
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="flex min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="hidden md:flex w-64 bg-gradient-to-b from-indigo-700 to-purple-800 shadow-2xl flex-col">
+    <div class="p-6 border-b border-indigo-500">
+      <h1 class="text-2xl font-bold tracking-wide flex items-center gap-2">
+        🎓 <span>Student Admin</span>
+      </h1>
+    </div>
+
+    <nav class="flex-1 p-6 space-y-3 text-sm">
+      <a href="/" class="flex items-center gap-3 p-3 rounded-lg hover:bg-indigo-600 transition">
+        <i data-lucide="home"></i> <span>All Students</span>
+      </a>
+      <a href="/add/" class="flex items-center gap-3 p-3 rounded-lg hover:bg-indigo-600 transition">
+        <i data-lucide="user-plus"></i> <span>Add Student</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col">
+
+    <!-- Top Header -->
+    <header class="glass sticky top-0 z-50 flex flex-col md:flex-row md:justify-between md:items-center p-6 gap-4 shadow-lg">
+      <h2 class="text-2xl md:text-3xl font-bold text-yellow-400">
+        {% block page_title %}All Students{% endblock %}
+      </h2>
+
+      <div class="flex flex-wrap items-center gap-4 justify-start md:justify-end">
+        <form method="GET" action="" class="flex items-center gap-2">
+          <input
+            type="text"
+            name="q"
+            placeholder="Search students..."
+            value="{{ request.GET.q|default:'' }}"
+            class="px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 w-48 md:w-64"
+          />
+          <button
+            type="submit"
+            class="bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition"
+          >
+            Search
+          </button>
+        </form>
+
+        <a
+          href="/add/"
+          class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg font-semibold transition"
+        >
+          <i data-lucide="plus"></i> Add Student
+        </a>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <section class="p-10 flex-1 overflow-y-auto">
+      {% block content %}
+      {% endblock %}
+    </section>
+  </main>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
